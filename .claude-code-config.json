@@ -1,0 +1,119 @@
+{
+  "name": "Wedding Game Development",
+  "description": "AI-augmented development environment for a chaotic wedding adventure game",
+  "version": "1.0.0",
+  "session_management": {
+    "start_command": "./scripts/dev-session-manager.sh start",
+    "end_command": "./scripts/dev-session-manager.sh end",
+    "status_command": "./scripts/dev-session-manager.sh status"
+  },
+  "mcp_configuration": {
+    "cursor_config": "/home/joe/.cursor/mcp.json",
+    "overflow_config": "./mcp-config-minimal.json",
+    "aggregator_script": "./scripts/aggregate_tools.py",
+    "test_command": "python3 scripts/aggregate_tools.py --test"
+  },
+  "project_structure": {
+    "documentation": [
+      "README-DEVELOPMENT.md",
+      "QUICK-REFERENCE.md",
+      "docs/termux-setup.md",
+      "docs/master-workflow.md"
+    ],
+    "scripts": [
+      "scripts/dev-session-manager.sh",
+      "scripts/mobile-dev-session.sh", 
+      "scripts/sync-mobile-work.sh",
+      "scripts/aggregate_tools.py"
+    ],
+    "configuration": [
+      ".env",
+      "example.env.txt",
+      ".cursorrules",
+      "mcp-config-minimal.json",
+      "mcp-config-practical.json",
+      "mcp-config.json"
+    ]
+  },
+  "development_workflow": {
+    "daily_start": [
+      "Load environment variables",
+      "Check MCP server status",
+      "Display current tasks",
+      "Show git status",
+      "Validate tool availability"
+    ],
+    "mobile_development": {
+      "setup": "./scripts/mobile-dev-session.sh setup",
+      "start": "./scripts/mobile-dev-session.sh start",
+      "sync_push": "./scripts/sync-mobile-work.sh push",
+      "sync_pull": "./scripts/sync-mobile-work.sh pull"
+    }
+  },
+  "tools_available": {
+    "cursor_direct": 40,
+    "overflow_aggregator": 18,
+    "total": 58,
+    "core_servers": [
+      "file-system",
+      "github",
+      "puppeteer",
+      "overflow-aggregator"
+    ],
+    "overflow_servers": [
+      "memory",
+      "sequential-thinking",
+      "everything",
+      "sqlite",
+      "fetch",
+      "brave-search",
+      "time",
+      "git",
+      "postgres",
+      "slack"
+    ]
+  },
+  "testing": {
+    "mcp_test": "python3 scripts/aggregate_tools.py --test",
+    "session_test": "./scripts/dev-session-manager.sh status",
+    "mobile_test": "./scripts/mobile-dev-session.sh test",
+    "sync_test": "./scripts/sync-mobile-work.sh test"
+  },
+  "troubleshooting": {
+    "mcp_issues": [
+      "Check session status: ./scripts/dev-session-manager.sh status",
+      "Test aggregator: python3 scripts/aggregate_tools.py --test",
+      "Review logs: ls .claude/",
+      "Restart session: ./scripts/dev-session-manager.sh start"
+    ],
+    "mobile_issues": [
+      "Check Termux setup: ./scripts/mobile-dev-session.sh status",
+      "Test connection: ./scripts/sync-mobile-work.sh test",
+      "Reinstall mobile environment: ./scripts/mobile-dev-session.sh setup"
+    ]
+  },
+  "quick_commands": {
+    "setup": "./setup.sh",
+    "start_dev": "make dev",
+    "test_all": "make test",
+    "mobile_dev": "make mobile",
+    "backup": "make backup",
+    "clean": "make clean"
+  },
+  "integrations": {
+    "cursor": "Full MCP integration with 40 direct tools",
+    "termux": "Mobile development support with synchronization",
+    "github": "Repository management and CI/CD",
+    "taskmaster": "Project management and task coordination"
+  },
+  "security": {
+    "api_keys": "Stored in .env file (git-ignored)",
+    "git_hooks": "Pre-commit hook prevents API key commits",
+    "placeholders": "Use placeholder values in example files"
+  },
+  "performance": {
+    "mcp_aggregator": "Overflow handling for 40+ tool limit",
+    "session_persistence": "Context preserved across restarts",
+    "mobile_sync": "Efficient bidirectional synchronization"
+  }
+}

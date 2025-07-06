@@ -1,0 +1,54 @@
+# Wedding Game Development Dependencies
+
+# Core development tools
+python-dotenv>=1.0.0          # Environment variable management
+requests>=2.28.0              # HTTP client for API calls
+GitPython>=3.1.0              # Git operations from Python
+pathlib>=1.0.1                # Path manipulation utilities
+
+# MCP and AI integration
+openai>=1.0.0                 # OpenAI API client (if using OpenAI tools)
+anthropic>=0.3.0              # Anthropic API client
+json-rpc>=1.13.0              # JSON-RPC for MCP communication
+
+# Development and testing
+pytest>=7.0.0                 # Testing framework
+pytest-cov>=4.0.0             # Coverage reporting
+black>=22.0.0                 # Code formatting
+flake8>=5.0.0                 # Code linting
+mypy>=1.0.0                   # Type checking
+
+# Project management and automation
+click>=8.0.0                  # CLI tool creation
+rich>=12.0.0                  # Rich text and progress bars
+pyyaml>=6.0.0                 # YAML file handling
+toml>=0.10.0                  # TOML file handling
+
+# Mobile development support
+paramiko>=2.11.0              # SSH client for mobile sync
+rsync>=1.0.0                  # File synchronization
+
+# Game development utilities
+pillow>=9.0.0                 # Image processing
+pygame>=2.1.0                 # Game development (if needed for tools)
+numpy>=1.21.0                 # Numerical computing (for game math)
+
+# Logging and monitoring
+loguru>=0.6.0                 # Enhanced logging
+psutil>=5.9.0                 # System monitoring
+
+# Development environment
+ipython>=8.0.0                # Enhanced Python REPL
+jupyter>=1.0.0                # Jupyter notebooks (for documentation)
+
+# Optional: Web scraping and research
+beautifulsoup4>=4.11.0        # HTML parsing
+selenium>=4.0.0               # Web automation (if needed)
+
+# Optional: Documentation generation
+sphinx>=5.0.0                 # Documentation generation
+mkdocs>=1.4.0                 # Documentation site generator
+
+# Optional: Performance profiling
+line-profiler>=3.5.0          # Line-by-line profiling
+memory-profiler>=0.60.0       # Memory usage profiling

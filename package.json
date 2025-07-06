@@ -1,0 +1,74 @@
+{
+  "name": "wedding-game",
+  "version": "1.0.0",
+  "description": "A chaotic wedding adventure game with AI-augmented development",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install && python3 -m pip install -r requirements.txt",
+    "dev": "./scripts/dev-session-manager.sh start",
+    "test": "npm run test:mcp && npm run test:scripts",
+    "test:mcp": "python3 scripts/aggregate_tools.py --test",
+    "test:scripts": "./scripts/dev-session-manager.sh status",
+    "mobile:setup": "./scripts/mobile-dev-session.sh setup",
+    "mobile:start": "./scripts/mobile-dev-session.sh start",
+    "mobile:sync": "./scripts/sync-mobile-work.sh",
+    "docs:serve": "cd docs && python3 -m http.server 8000",
+    "clean": "rm -rf node_modules/.cache .cache __pycache__ *.pyc",
+    "lint": "echo 'Linting project files...' && python3 -m flake8 scripts/ || true",
+    "format": "echo 'Formatting project files...' && python3 -m black scripts/ || true",
+    "install:mcp": "./setup-mcp.sh",
+    "backup": "tar -czf backup-$(date +%Y%m%d-%H%M%S).tar.gz --exclude='.git' --exclude='node_modules' --exclude='.cache' .",
+    "session:start": "./scripts/dev-session-manager.sh start",
+    "session:end": "./scripts/dev-session-manager.sh end",
+    "session:status": "./scripts/dev-session-manager.sh status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jab1986/wedding-game.git"
+  },
+  "keywords": [
+    "game",
+    "godot",
+    "wedding",
+    "adventure",
+    "ai-development",
+    "mcp",
+    "claude-code"
+  ],
+  "author": "Wedding Game Development Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jab1986/wedding-game/issues"
+  },
+  "homepage": "https://github.com/jab1986/wedding-game#readme",
+  "devDependencies": {
+    "@modelcontextprotocol/server-filesystem": "^0.1.0",
+    "@modelcontextprotocol/server-github": "^0.1.0",
+    "@modelcontextprotocol/server-puppeteer": "^0.1.0",
+    "@modelcontextprotocol/server-memory": "^0.1.0",
+    "@modelcontextprotocol/server-sequential-thinking": "^0.1.0",
+    "@modelcontextprotocol/server-everything": "^0.1.0",
+    "@modelcontextprotocol/server-sqlite": "^0.1.0",
+    "@modelcontextprotocol/server-fetch": "^0.1.0",
+    "@modelcontextprotocol/server-brave-search": "^0.1.0",
+    "@modelcontextprotocol/server-time": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "files": [
+    "scripts/",
+    "docs/",
+    "README-DEVELOPMENT.md",
+    "QUICK-REFERENCE.md",
+    "setup.sh",
+    "setup-mcp.sh",
+    "requirements.txt",
+    "mcp-config*.json"
+  ]
+}
