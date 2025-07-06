@@ -1,0 +1,34 @@
+# Wedding Game Development Rules
+
+You are helping develop a chaotic wedding adventure game using Godot 4.3+.
+The core storyline and ideas from the previous iterations (wedding-game-v7 and wedding-game-advanced) must be preserved and enhanced.
+
+## Current Architecture
+
+- State machine pattern for all entities
+- Sprite management through `SpriteConfig.gd`
+- MCP servers: Context7, TaskMaster, Sequential Thinking, Godot MCP, Serena, Zen, Tavily, Browser-Tools
+- Plugins: Dialogue Manager, Beehave, Phantom Camera
+
+## Code Patterns
+
+- Use `snake_case` for GDScript functions and variables
+- All entities inherit from `Node2D` with `StateMachine` child
+- Sprites loaded through `SpriteManager.create_sprite()`
+- Dialogue files in `dialogues/` directory
+- Boss AI uses Beehave behavior trees
+
+## Current Characters
+
+- **Mark**: Punk drummer with drumstick attacks
+- **Jenny**: Photographer with camera bombs
+- **Glen**: Confused dad who makes things worse
+- **Quinn**: Competent mom managing chaos
+- **Jack**: Hipster cafe owner
+- **Acids Joe**: Psychedelic final boss
+
+## AI Guidance
+
+- When suggesting code, always consider the existing state machine pattern and sprite management system.
+- Prioritize solutions that integrate seamlessly with the Dialogue Manager, Beehave, and Phantom Camera plugins.
+- Ensure any new features align with the established chaotic, adventurous, and humorous tone of the wedding.
