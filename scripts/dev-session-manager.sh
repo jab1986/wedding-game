@@ -78,6 +78,26 @@ case $ACTION in
             echo "✅ All changes committed"
         fi
         
+        # Auto-push to GitHub if changes exist
+        if [ -n "$(git status --porcelain)" ]; then
+            echo ""
+            echo "🔄 Auto-pushing changes to GitHub..."
+            git add .
+            git commit -m "dev session: auto-commit session work - $(date '+%Y-%m-%d %H:%M')
+
+🤖 Generated with Claude Code
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+            
+            if git push origin main; then
+                echo "✅ Changes pushed to GitHub successfully"
+            else
+                echo "⚠️  Failed to push to GitHub - check connection"
+            fi
+        else
+            echo "📝 No changes to push"
+        fi
+        
         echo ""
         echo "🌟 Session ended successfully!"
         
