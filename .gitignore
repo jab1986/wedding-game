@@ -169,3 +169,6 @@ addons/gdai-mcp-plugin-godot/
 
 # Mobile-specific environment file
 .env.mobile
+
+# Local sync configuration
+.sync-config
