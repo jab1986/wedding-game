@@ -1,7 +1,7 @@
 # Wedding Game Development Makefile
 # Provides convenient commands for development workflow
 
-.PHONY: help setup install clean test dev mobile docs lint format backup
+.PHONY: help setup install clean test dev mobile docs lint format backup prime-claude
 
 # Default target
 .DEFAULT_GOAL := help
@@ -171,3 +171,7 @@ update-mcp: ## Update MCP servers
 	npx -y @modelcontextprotocol/server-github@latest --help > /dev/null 2>&1
 	npx -y @modelcontextprotocol/server-puppeteer@latest --help > /dev/null 2>&1
 	npx -y @modelcontextprotocol/server-memory@latest --help > /dev/null 2>&1
+
+prime-claude: ## Prime Claude with project context and collaboration approach
+	@echo "$(YELLOW)Priming Claude with project context...$(NC)"
+	./scripts/prime-claude.sh

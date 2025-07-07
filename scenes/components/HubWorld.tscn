@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjkq5y8vhgxra"]
+
+[ext_resource type="Script" path="res://scenes/components/HubWorld.gd" id="1_4m2tk"]
+[ext_resource type="PackedScene" path="res://scenes/components/Player.tscn" id="2_5n7xp"]
+[ext_resource type="PackedScene" path="res://scenes/components/LevelEntrance.tscn" id="3_8k1mq"]
+
+[node name="HubWorld" type="Node2D"]
+script = ExtResource("1_4m2tk")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.2, 0.3, 0.2, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_5n7xp")]
+position = Vector2(960, 540)
+
+[node name="LevelEntrances" type="Node2D" parent="."]
+
+[node name="GlenBingo" parent="LevelEntrances" instance=ExtResource("3_8k1mq")]
+position = Vector2(400, 400)
+level_name = "glen_bingo"
+display_name = "Glen Bingo"
+description = "Test your knowledge of Glen's confusion"
+
+[node name="BeatEmUp" parent="LevelEntrances" instance=ExtResource("3_8k1mq")]
+position = Vector2(800, 400)
+level_name = "beat_em_up"
+display_name = "Beat 'Em Up"
+description = "Fight through alien musicians"
+
+[node name="WeddingAdventure" parent="LevelEntrances" instance=ExtResource("3_8k1mq")]
+position = Vector2(1200, 400)
+level_name = "wedding_adventure"
+display_name = "Wedding Adventure"
+description = "The chaotic journey to the ceremony"
+
+[node name="BossFight" parent="LevelEntrances" instance=ExtResource("3_8k1mq")]
+position = Vector2(1600, 400)
+level_name = "boss_fight"
+display_name = "Final Boss"
+description = "Face Acids Joe in his psychedelic form"
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="InfoSign" type="StaticBody2D" parent="NPCs"]
+position = Vector2(960, 300)
+
+[node name="InfoSignSprite" type="ColorRect" parent="NPCs/InfoSign"]
+offset_left = -50.0
+offset_top = -30.0
+offset_right = 50.0
+offset_bottom = 30.0
+color = Color(0.8, 0.8, 0.2, 1)
+
+[node name="InfoSignLabel" type="Label" parent="NPCs/InfoSign"]
+offset_left = -40.0
+offset_top = -10.0
+offset_right = 40.0
+offset_bottom = 10.0
+text = "HUB"
+horizontal_alignment = 1
+
+[node name="InfoSignCollision" type="CollisionShape2D" parent="NPCs/InfoSign"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+enabled = true

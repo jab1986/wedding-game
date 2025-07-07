@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwf7jh5xqk7xc"]
+
+[ext_resource type="Script" path="res://scenes/Main.gd" id="1_0s3qr"]
+[ext_resource type="PackedScene" path="res://scenes/components/HubWorld.tscn" id="2_1m5xp"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0s3qr")
+
+[node name="HubWorld" parent="." instance=ExtResource("2_1m5xp")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DebugLabel" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 400.0
+offset_bottom = -10.0
+text = "Hub World - Use WASD to move, Space to interact"
