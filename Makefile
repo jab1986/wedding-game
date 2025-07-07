@@ -175,3 +175,15 @@ update-mcp: ## Update MCP servers
 prime-claude: ## Prime Claude with project context and collaboration approach
 	@echo "$(YELLOW)Priming Claude with project context...$(NC)"
 	./scripts/prime-claude.sh
+
+session-start: ## Start development session with full setup validation
+	@echo "$(YELLOW)Starting development session...$(NC)"
+	./scripts/session-start-hook.sh
+
+validate-setup: ## Validate complete session setup
+	@echo "$(YELLOW)Validating session setup...$(NC)"
+	./scripts/validate-session-setup.sh
+
+remind-claude: ## Remind Claude of collaboration approach
+	@echo "$(YELLOW)Reminding Claude of collaboration protocol...$(NC)"
+	./scripts/claude-reminder-hook.sh

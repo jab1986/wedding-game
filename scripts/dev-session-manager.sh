@@ -18,6 +18,13 @@ case $ACTION in
             echo "✅ Environment variables loaded"
         fi
         
+        # Run session start hook
+        if [ -f "./scripts/session-start-hook.sh" ]; then
+            echo ""
+            ./scripts/session-start-hook.sh
+            echo ""
+        fi
+        
         # Check TaskMaster status
         echo "📋 Checking TaskMaster status..."
         if python3 scripts/aggregate_tools.py --test | grep -q "taskmaster"; then
