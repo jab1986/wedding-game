@@ -1,0 +1,647 @@
+{
+  "claude_personalities": {
+    "creative_game_designer": {
+      "description": "Narrative-focused designer specializing in character voices, story structure, and dialogue systems",
+      "traits": ["narrative_design", "character_voice_expert", "dialogue_systems", "dark_humor", "story_structure"],
+      "strengths": ["Character development", "Dialogue writing", "Story pacing", "Voice consistency"],
+      "approach": "Ask creative questions about character motivations and story flow"
+    },
+    "technical_game_architect": {
+      "description": "Systems-focused designer analyzing game mechanics, technical feasibility, and implementation strategy",
+      "traits": ["game_mechanics_analysis", "prototype_strategy", "technical_feasibility", "risk_assessment", "system_design"],
+      "strengths": ["Technical analysis", "Risk assessment", "System architecture", "Implementation planning"],
+      "approach": "Evaluate technical complexity and provide structured analysis of options"
+    },
+    "combat_systems_designer": {
+      "description": "Specialist in character abilities, combat balance, and gameplay mechanics",
+      "traits": ["character_ability_design", "combat_balance", "gameplay_mechanics", "character_differentiation", "player_experience"],
+      "strengths": ["Ability design", "Combat balance", "Player progression", "Character uniqueness"],
+      "approach": "Focus on gameplay feel and character differentiation through abilities"
+    },
+    "user_experience_designer": {
+      "description": "Expert in mobile optimization, accessibility, and user interface design",
+      "traits": ["mobile_optimization", "ui_design", "accessibility", "user_testing", "cross_platform"],
+      "strengths": ["Mobile UX", "Touch controls", "UI scaling", "User testing"],
+      "approach": "Prioritize user experience and accessibility across all platforms"
+    },
+    "audio_visual_designer": {
+      "description": "Creative specialist in audio systems, visual effects, and atmospheric design",
+      "traits": ["audio_design", "visual_effects", "atmosphere_creation", "asset_pipeline", "mood_design"],
+      "strengths": ["Audio systems", "Visual effects", "Atmosphere", "Asset creation"],
+      "approach": "Focus on sensory experience and emotional impact through audio/visual design"
+    },
+    "quality_assurance_engineer": {
+      "description": "Testing specialist focused on quality systems, automation, and cross-platform validation",
+      "traits": ["testing_strategy", "automation", "quality_metrics", "cross_platform_testing", "regression_testing"],
+      "strengths": ["Test automation", "Quality metrics", "Bug prevention", "Performance testing"],
+      "approach": "Systematic approach to quality assurance and testing strategy"
+    }
+  },
+  "tasks": {
+    "critical_discussion": {
+      "disc_001": {
+        "id": "dialogue_manager_integration_design",
+        "title": "Design DialogueManager Integration Strategy",
+        "description": "How should we integrate DialogueManager addon for character conversations?",
+        "priority": "critical",
+        "status": "pending",
+        "type": "discussion",
+        "claude_personality": "creative_game_designer",
+        "claude_traits": ["narrative_design", "character_voice_expert", "dialogue_systems", "dark_humor"],
+        "discussion_points": [
+          "How should DialogueManager handle the 6-act story structure?",
+          "What's the best way to implement character-specific dialogue patterns?",
+          "How can we make dialogue feel chaotic and unpredictable?",
+          "Should we use branching conversations or linear sequences?",
+          "How do we integrate dark humor while maintaining character voices?",
+          "Present 3 dialogue system approaches with pros/cons"
+        ],
+        "required_mcp_servers": ["sequential-thinking", "memory", "context7", "brave-search"],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "context7", "brave-search"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to analyze dialogue system options",
+          "2. Research DialogueManager patterns with brave-search",
+          "3. Store dialogue design decisions in memory_create_entities",
+          "4. Reference character script with context7"
+        ],
+        "mcp_server_roles": {
+          "sequential-thinking": "Structure complex dialogue system analysis",
+          "memory": "Store character voice guidelines and design decisions",
+          "context7": "Reference existing character script and story structure",
+          "brave-search": "Research DialogueManager best practices and examples"
+        },
+        "depends_on": [],
+        "blocks": ["impl_dialogue_system", "char_dialogue_trees"],
+        "estimated_effort": "high",
+        "tags": ["dialogue", "core-system", "character-voice"]
+      },
+      "disc_002": {
+        "id": "first_minigame_selection",
+        "title": "Choose First Mini-Game to Implement",
+        "description": "Which mini-game should we prototype first: Glen Bingo, Beat 'em Up, Wedding Adventure, or Boss Fight?",
+        "priority": "critical",
+        "status": "pending",
+        "type": "discussion",
+        "claude_personality": "technical_game_architect",
+        "claude_traits": ["game_mechanics_analysis", "prototype_strategy", "technical_feasibility", "risk_assessment"],
+        "discussion_points": [
+          "Which mini-game proves the most core mechanics?",
+          "What's the complexity vs. learning value for each option?",
+          "Should we start with Glen Bingo (simplest) or Beat 'em Up (most complex)?",
+          "How will the first prototype inform the other mini-games?",
+          "What technical challenges do we expect for each option?",
+          "Present detailed analysis of all 4 mini-game options"
+        ],
+        "required_mcp_servers": ["sequential-thinking", "memory", "brave-search", "context7"],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "brave-search", "context7"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to evaluate each mini-game option",
+          "2. Research similar game mechanics with brave-search",
+          "3. Store prototype decision rationale in memory_create_entities",
+          "4. Reference game architecture with context7"
+        ],
+        "mcp_server_roles": {
+          "sequential-thinking": "Analyze complexity vs learning value for each mini-game",
+          "memory": "Store prototype strategy and technical considerations",
+          "brave-search": "Research similar game mechanics and implementation patterns",
+          "context7": "Reference existing game architecture and character systems"
+        },
+        "depends_on": [],
+        "blocks": ["impl_first_minigame", "minigame_framework"],
+        "estimated_effort": "medium",
+        "tags": ["minigame", "prototype", "game-mechanics"]
+      },
+      "disc_003": {
+        "id": "character_ability_system_design",
+        "title": "Design Character Ability and Combat System",
+        "description": "How should Mark's drumsticks, Jenny's camera bombs, and other character abilities work?",
+        "priority": "critical",
+        "status": "pending",
+        "type": "discussion",
+        "claude_personality": "combat_systems_designer",
+        "claude_traits": ["character_ability_design", "combat_balance", "gameplay_mechanics", "character_differentiation"],
+        "discussion_points": [
+          "How should Mark's drumstick spinning attacks feel and behave?",
+          "What makes Jenny's camera bombs unique and powerful?",
+          "How do Glen's chaos abilities work mechanically?",
+          "Should Quinn have offensive or purely supportive abilities?",
+          "How do character abilities escalate with progression?",
+          "Present ability concepts for each of the 6 main characters"
+        ],
+        "required_mcp_servers": ["sequential-thinking", "memory", "context7"],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "memory_create_relations", "context7"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to design ability systems",
+          "2. Store character ability concepts in memory_create_entities",
+          "3. Create ability relationships with memory_create_relations",
+          "4. Reference character script with context7"
+        ],
+        "mcp_server_roles": {
+          "sequential-thinking": "Design balanced ability systems for each character",
+          "memory": "Store character ability concepts and balance considerations",
+          "context7": "Reference character personalities and story requirements"
+        },
+        "depends_on": [],
+        "blocks": ["impl_combat_system", "char_abilities"],
+        "estimated_effort": "high",
+        "tags": ["character-abilities", "combat", "game-mechanics"]
+      }
+    },
+    "high_priority_discussion": {
+      "disc_004": {
+        "id": "audio_system_strategy",
+        "title": "Design Audio System and Asset Strategy",
+        "description": "How should we handle music, sound effects, and voice for the chaotic wedding theme?",
+        "priority": "high",
+        "status": "pending",
+        "type": "discussion",
+        "claude_personality": "audio_visual_designer",
+        "claude_traits": ["audio_design", "atmosphere_creation", "asset_pipeline", "mood_design"],
+        "discussion_points": [
+          "What audio style matches the chaotic South Park aesthetic?",
+          "Should we use generated audio, free assets, or custom recordings?",
+          "How do we handle the psychedelic transformation music?",
+          "What sound effects enhance the chaotic wedding atmosphere?",
+          "Should character dialogue be voiced or text-only?",
+          "Present 3 audio strategy approaches with implementation paths"
+        ],
+        "required_mcp_servers": ["sequential-thinking", "memory", "brave-search", "context7"],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "brave-search", "context7"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to plan audio system architecture",
+          "2. Research audio assets and tools with brave-search",
+          "3. Store audio design decisions in memory_create_entities",
+          "4. Reference game design context with context7"
+        ],
+        "mcp_server_roles": {
+          "sequential-thinking": "Structure audio system architecture and asset pipeline",
+          "memory": "Store audio design decisions and asset requirements",
+          "brave-search": "Research audio tools, libraries, and asset sources",
+          "context7": "Reference game design aesthetic and character requirements"
+        },
+        "depends_on": [],
+        "blocks": ["impl_audio_system", "audio_assets"],
+        "estimated_effort": "medium",
+        "tags": ["audio", "assets", "atmosphere"]
+      },
+      "disc_005": {
+        "id": "sprite_asset_creation_plan",
+        "title": "Plan Sprite Asset Creation Strategy",
+        "description": "How should we replace placeholder graphics with actual character and environment sprites?",
+        "priority": "high",
+        "status": "pending",
+        "type": "discussion",
+        "discussion_points": [
+          "What art style best captures the chaotic wedding aesthetic?",
+          "Should we use AI generation, pixel art, or vector graphics?",
+          "How detailed should character sprites be for the 10-15 minute gameplay?",
+          "What's the priority order for sprite creation?",
+          "How do we maintain visual consistency across all assets?",
+          "Present 3 sprite creation approaches with timeline estimates"
+        ],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "brave-search", "puppeteer"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to evaluate sprite creation options",
+          "2. Research art styles and tools with brave-search",
+          "3. Use puppeteer to capture visual references",
+          "4. Store sprite design decisions in memory_create_entities"
+        ],
+        "depends_on": [],
+        "blocks": ["impl_sprite_assets", "visual_polish"],
+        "estimated_effort": "high",
+        "tags": ["sprites", "visual-design", "assets"]
+      },
+      "disc_006": {
+        "id": "mobile_optimization_strategy",
+        "title": "Design Mobile Optimization and Touch Controls",
+        "description": "How should we optimize the game for mobile devices with touch controls?",
+        "priority": "high",
+        "status": "pending",
+        "type": "discussion",
+        "claude_personality": "user_experience_designer",
+        "claude_traits": ["mobile_optimization", "ui_design", "accessibility", "cross_platform"],
+        "discussion_points": [
+          "What touch control scheme works best for top-down movement?",
+          "How do we handle character abilities on touch devices?",
+          "What UI scaling is needed for different screen sizes?",
+          "How do we optimize performance for mobile hardware?",
+          "Should we have mobile-specific gameplay adjustments?",
+          "Present mobile optimization approach with control mockups"
+        ],
+        "required_mcp_servers": ["sequential-thinking", "memory", "brave-search", "context7"],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "brave-search", "context7"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to design mobile optimization",
+          "2. Research mobile game UI patterns with brave-search",
+          "3. Store mobile design decisions in memory_create_entities",
+          "4. Reference mobile development notes with context7"
+        ],
+        "mcp_server_roles": {
+          "sequential-thinking": "Analyze mobile UX requirements and optimization strategies",
+          "memory": "Store mobile design patterns and performance requirements",
+          "brave-search": "Research mobile game UI/UX best practices and touch controls",
+          "context7": "Reference existing mobile development documentation"
+        },
+        "depends_on": [],
+        "blocks": ["impl_mobile_controls", "mobile_ui"],
+        "estimated_effort": "medium",
+        "tags": ["mobile", "optimization", "touch-controls"]
+      }
+    },
+    "medium_priority_discussion": {
+      "disc_007": {
+        "id": "wedding_chaos_progression",
+        "title": "Design Wedding Chaos Escalation System",
+        "description": "How should chaos levels increase throughout the wedding to create tension?",
+        "priority": "medium",
+        "status": "pending",
+        "type": "discussion",
+        "discussion_points": [
+          "What events should trigger chaos level increases?",
+          "How do we balance frustration with fun progression?",
+          "What visual and audio cues indicate rising chaos?",
+          "How do character behaviors change with chaos levels?",
+          "Should players be able to reduce chaos or only manage it?",
+          "Present chaos progression system with example scenarios"
+        ],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "context7"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to design chaos progression",
+          "2. Store chaos system concepts in memory_create_entities",
+          "3. Reference game design principles with context7"
+        ],
+        "depends_on": ["dialogue_manager_integration_design"],
+        "blocks": ["impl_chaos_system"],
+        "estimated_effort": "medium",
+        "tags": ["chaos-system", "progression", "game-mechanics"]
+      },
+      "disc_008": {
+        "id": "testing_framework_selection",
+        "title": "Choose Testing Framework and Quality Assurance Strategy",
+        "description": "How should we test the game across different platforms and ensure quality?",
+        "priority": "medium",
+        "status": "pending",
+        "type": "discussion",
+        "discussion_points": [
+          "What testing framework works best with Godot 4.4?",
+          "How do we test mobile and desktop versions?",
+          "What quality metrics should we track?",
+          "How do we handle regression testing for mini-games?",
+          "Should we use automated testing or manual testing?",
+          "Present testing strategy with tool recommendations"
+        ],
+        "mcp_tools": ["sequential-thinking_sequentialthinking", "memory_create_entities", "brave-search"],
+        "mcp_workflow": [
+          "1. Use sequential-thinking to evaluate testing options",
+          "2. Research Godot testing tools with brave-search",
+          "3. Store testing strategy in memory_create_entities"
+        ],
+        "depends_on": [],
+        "blocks": ["impl_testing_framework"],
+        "estimated_effort": "low",
+        "tags": ["testing", "quality-assurance", "automation"]
+      }
+    },
+    "implementation_tasks": {
+      "impl_001": {
+        "id": "impl_dialogue_system",
+        "title": "Implement DialogueManager Integration",
+        "description": "Set up DialogueManager addon and create character dialogue trees",
+        "priority": "critical",
+        "status": "blocked",
+        "type": "implementation",
+        "technical_requirements": [
+          "Install and configure DialogueManager addon",
+          "Create dialogue files for each character",
+          "Implement character voice consistency",
+          "Add branching conversation support",
+          "Test dialogue system with placeholder text"
+        ],
+        "acceptance_criteria": [
+          "DialogueManager addon is properly configured",
+          "Each character has distinct dialogue patterns",
+          "Dialogue integrates with character interactions",
+          "Branching conversations work correctly",
+          "Dark humor tone is maintained"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["dialogue_manager_integration_design"],
+        "estimated_effort": "high",
+        "tags": ["dialogue", "implementation", "core-system"]
+      },
+      "impl_002": {
+        "id": "impl_first_minigame",
+        "title": "Implement First Mini-Game Prototype",
+        "description": "Build the first mini-game based on discussion decision",
+        "priority": "critical",
+        "status": "blocked",
+        "type": "implementation",
+        "technical_requirements": [
+          "Create mini-game scene structure",
+          "Implement game-specific mechanics",
+          "Add win/lose conditions",
+          "Integrate with hub world progression",
+          "Test gameplay flow"
+        ],
+        "acceptance_criteria": [
+          "Mini-game is fully playable",
+          "Mechanics feel engaging and chaotic",
+          "Win/lose conditions work correctly",
+          "Integrates with hub world",
+          "Performance is acceptable"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["first_minigame_selection"],
+        "estimated_effort": "high",
+        "tags": ["minigame", "implementation", "prototype"]
+      },
+      "impl_003": {
+        "id": "impl_combat_system",
+        "title": "Implement Character Abilities and Combat",
+        "description": "Create character-specific abilities and combat mechanics",
+        "priority": "critical",
+        "status": "blocked",
+        "type": "implementation",
+        "technical_requirements": [
+          "Implement Mark's drumstick spinning attacks",
+          "Create Jenny's camera bomb mechanics",
+          "Add Glen's chaos-inducing abilities",
+          "Implement Quinn's management abilities",
+          "Add combat feedback and effects"
+        ],
+        "acceptance_criteria": [
+          "Each character has unique abilities",
+          "Combat feels responsive and chaotic",
+          "Abilities integrate with mini-games",
+          "Visual feedback is clear",
+          "Balance feels appropriate"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["character_ability_system_design"],
+        "estimated_effort": "high",
+        "tags": ["combat", "character-abilities", "implementation"]
+      },
+      "impl_004": {
+        "id": "impl_audio_system",
+        "title": "Implement Audio System and Assets",
+        "description": "Add music, sound effects, and audio management",
+        "priority": "high",
+        "status": "blocked",
+        "type": "implementation",
+        "technical_requirements": [
+          "Enhance AudioManager.gd with advanced features",
+          "Add background music for each scene",
+          "Create sound effects for character abilities",
+          "Implement psychedelic transformation audio",
+          "Add audio settings and volume controls"
+        ],
+        "acceptance_criteria": [
+          "AudioManager handles all audio needs",
+          "Each scene has appropriate music",
+          "Sound effects enhance gameplay",
+          "Audio settings work correctly",
+          "Performance impact is minimal"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["audio_system_strategy"],
+        "estimated_effort": "medium",
+        "tags": ["audio", "implementation", "assets"]
+      },
+      "impl_005": {
+        "id": "impl_sprite_assets",
+        "title": "Create and Integrate Sprite Assets",
+        "description": "Replace placeholder graphics with actual sprites",
+        "priority": "high",
+        "status": "blocked",
+        "type": "implementation",
+        "technical_requirements": [
+          "Create character sprites for all 6 characters",
+          "Design environment and UI graphics",
+          "Add animation frames for character actions",
+          "Optimize sprites for mobile performance",
+          "Update SpriteManager configuration"
+        ],
+        "acceptance_criteria": [
+          "All characters have proper sprites",
+          "Art style is consistent throughout",
+          "Animations are smooth and appropriate",
+          "Mobile performance is maintained",
+          "Sprites match character personalities"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["sprite_asset_creation_plan"],
+        "estimated_effort": "high",
+        "tags": ["sprites", "assets", "implementation"]
+      },
+      "impl_006": {
+        "id": "impl_mobile_controls",
+        "title": "Implement Mobile Touch Controls",
+        "description": "Add touch controls and mobile optimization",
+        "priority": "high",
+        "status": "blocked",
+        "type": "implementation",
+        "technical_requirements": [
+          "Add virtual joystick for movement",
+          "Create touch buttons for abilities",
+          "Implement UI scaling for different screens",
+          "Add mobile-specific settings",
+          "Test on actual mobile devices"
+        ],
+        "acceptance_criteria": [
+          "Touch controls feel responsive",
+          "UI scales properly on all screen sizes",
+          "Mobile performance is acceptable",
+          "Controls are intuitive for mobile users",
+          "Settings allow customization"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["mobile_optimization_strategy"],
+        "estimated_effort": "medium",
+        "tags": ["mobile", "touch-controls", "implementation"]
+      }
+    },
+    "enhancement_tasks": {
+      "enh_001": {
+        "id": "impl_chaos_system",
+        "title": "Implement Wedding Chaos Progression",
+        "description": "Create dynamic chaos level system with escalating events",
+        "priority": "medium",
+        "status": "blocked",
+        "type": "enhancement",
+        "technical_requirements": [
+          "Add chaos level tracking to GameManager",
+          "Create chaos event system",
+          "Implement visual chaos indicators",
+          "Add audio cues for chaos escalation",
+          "Create chaos-based character behavior changes"
+        ],
+        "acceptance_criteria": [
+          "Chaos levels increase based on player actions",
+          "Visual feedback clearly shows chaos state",
+          "Character behaviors change with chaos",
+          "System enhances game tension",
+          "Chaos feels organic and unpredictable"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["wedding_chaos_progression"],
+        "estimated_effort": "medium",
+        "tags": ["chaos-system", "enhancement", "game-mechanics"]
+      },
+      "enh_002": {
+        "id": "impl_testing_framework",
+        "title": "Set Up Testing Framework",
+        "description": "Implement automated testing and quality assurance",
+        "priority": "medium",
+        "status": "blocked",
+        "type": "enhancement",
+        "technical_requirements": [
+          "Install chosen testing framework",
+          "Create unit tests for core systems",
+          "Add integration tests for mini-games",
+          "Set up continuous integration",
+          "Create performance benchmarks"
+        ],
+        "acceptance_criteria": [
+          "Testing framework is properly configured",
+          "Core systems have adequate test coverage",
+          "CI pipeline runs tests automatically",
+          "Performance regressions are caught",
+          "Testing is integrated into development workflow"
+        ],
+        "mcp_tools": ["filesystem", "github", "memory_add_observations"],
+        "depends_on": ["testing_framework_selection"],
+        "estimated_effort": "low",
+        "tags": ["testing", "quality-assurance", "enhancement"]
+      }
+    }
+  },
+  "workflow": {
+    "current_phase": "critical_discussion",
+    "progression": {
+      "critical_discussion": {
+        "tasks": ["dialogue_manager_integration_design", "first_minigame_selection", "character_ability_system_design"],
+        "priority": "critical",
+        "next_phase": "high_priority_discussion"
+      },
+      "high_priority_discussion": {
+        "tasks": ["audio_system_strategy", "sprite_asset_creation_plan", "mobile_optimization_strategy"],
+        "priority": "high",
+        "next_phase": "implementation"
+      },
+      "implementation": {
+        "tasks": ["impl_dialogue_system", "impl_first_minigame", "impl_combat_system", "impl_audio_system", "impl_sprite_assets", "impl_mobile_controls"],
+        "priority": "critical",
+        "next_phase": "enhancement"
+      },
+      "enhancement": {
+        "tasks": ["impl_chaos_system", "impl_testing_framework"],
+        "priority": "medium",
+        "next_phase": "polish"
+      }
+    },
+    "mcp_integration": {
+      "memory_system": "active",
+      "sequential_thinking": "active",
+      "context7": "active",
+      "brave_search": "active",
+      "filesystem": "ready_for_implementation",
+      "github": "ready_for_implementation",
+      "puppeteer": "ready_for_research",
+      "task_storage": "memory_entities",
+      "decision_tracking": "memory_observations"
+    }
+  },
+  "discussion_protocol": {
+    "mandatory_steps": [
+      "1. Read context first (docs/revised_game_design_context.md)",
+      "2. Ask design questions from discussion_points",
+      "3. Present 2-3 options for user choice",
+      "4. Get approval before moving to implementation",
+      "5. Store decisions in memory system"
+    ],
+    "emergency_stop": "Stop - discuss first",
+    "core_philosophy": "Discussion-driven collaborative project - conversation first, code second"
+  },
+  "mcp_server_requirements": {
+    "critical_servers": {
+      "sequential-thinking": {
+        "description": "Complex problem-solving and structured analysis",
+        "usage": "All discussion tasks for analyzing options and structuring solutions",
+        "status": "working"
+      },
+      "memory": {
+        "description": "Knowledge graph for storing design decisions and relationships",
+        "usage": "Store all design decisions, character concepts, and technical choices",
+        "status": "working"
+      },
+      "context7": {
+        "description": "Advanced context and conversation management",
+        "usage": "Reference existing documentation and maintain discussion context",
+        "status": "working"
+      }
+    },
+    "high_priority_servers": {
+      "brave-search": {
+        "description": "Web search for research and reference gathering",
+        "usage": "Research game mechanics, tools, and implementation patterns",
+        "status": "working_with_api_key"
+      },
+      "filesystem": {
+        "description": "File operations and project navigation",
+        "usage": "Implementation tasks requiring file manipulation",
+        "status": "working"
+      },
+      "github": {
+        "description": "Version control and repository management",
+        "usage": "Implementation tasks requiring git operations",
+        "status": "working"
+      }
+    },
+    "optional_servers": {
+      "puppeteer": {
+        "description": "Web automation for capturing references and testing",
+        "usage": "Visual research and UI testing",
+        "status": "working"
+      },
+      "everything": {
+        "description": "Testing and utility functions",
+        "usage": "Development environment testing and validation",
+        "status": "working"
+      }
+    }
+  },
+  "personality_assignment_guide": {
+    "task_type_mapping": {
+      "narrative_design": "creative_game_designer",
+      "dialogue_systems": "creative_game_designer",
+      "game_mechanics": "technical_game_architect",
+      "prototype_strategy": "technical_game_architect",
+      "character_abilities": "combat_systems_designer",
+      "combat_balance": "combat_systems_designer",
+      "mobile_optimization": "user_experience_designer",
+      "ui_design": "user_experience_designer",
+      "audio_design": "audio_visual_designer",
+      "visual_effects": "audio_visual_designer",
+      "testing_strategy": "quality_assurance_engineer",
+      "automation": "quality_assurance_engineer"
+    },
+    "usage_instructions": {
+      "before_task": "Review claude_personality and claude_traits for the task",
+      "during_task": "Adopt the specified personality approach and expertise",
+      "mcp_usage": "Use required_mcp_servers according to mcp_server_roles",
+      "decision_storage": "Store all design decisions in memory with appropriate entities and relations"
+    }
+  },
+  "metadata": {
+    "created": "2025-07-08T00:00:00Z",
+    "last_updated": "2025-07-08T00:00:00Z",
+    "version": "3.1.0",
+    "total_tasks": 16,
+    "active_tasks": 16,
+    "completed_tasks": 0,
+    "claude_code_integration": "full",
+    "personality_system": "complete",
+    "mcp_integration": "comprehensive",
+    "comprehensive_rebuild": "complete"
+  }
+}
