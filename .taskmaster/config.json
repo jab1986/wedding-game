@@ -1,0 +1,86 @@
+{
+  "models": {
+    "main": {
+      "provider": "claude-code",
+      "modelId": "sonnet",
+      "maxTokens": 64000,
+      "temperature": 0.2
+    },
+    "research": {
+      "provider": "claude-code",
+      "modelId": "opus",
+      "maxTokens": 32000,
+      "temperature": 0.1
+    },
+    "fallback": {
+      "provider": "claude-code",
+      "modelId": "sonnet",
+      "maxTokens": 64000,
+      "temperature": 0.2
+    }
+  },
+  "claudeCode": {
+    "maxTurns": 5,
+    "customSystemPrompt": "You are a collaborative game development assistant specialized in chaotic RPG design. Always prioritize discussion-driven development and creative brainstorming over immediate implementation. Focus on South Park + Death Match + Pokemon aesthetic with dark humor.",
+    "appendSystemPrompt": "Remember: This is a DISCUSSION-DRIVEN project. Always ask design questions before implementing. Present 2-3 options for user choice. Get approval before coding. Store design decisions in memory.",
+    "permissionMode": "default",
+    "allowedTools": ["Read", "Write", "Edit", "LS", "Glob", "Grep", "Bash", "Task", "memory_create_entities", "memory_search_nodes", "sequential-thinking_sequentialthinking", "context7", "brave-search", "filesystem", "github", "puppeteer"],
+    "mcpServers": {
+      "memory": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-memory"]
+      },
+      "sequential-thinking": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      },
+      "context7": {
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp"]
+      },
+      "brave-search": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+        "env": {
+          "BRAVE_API_KEY": "BSA7DmfCgYe3E72WqMVdkuZmkj51W3v"
+        }
+      },
+      "filesystem": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/joe/Projects/wedding-game"]
+      },
+      "github": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-github"]
+      },
+      "puppeteer": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+      },
+      "everything": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-everything"]
+      }
+    }
+  },
+  "commandSpecific": {
+    "parse-prd": {
+      "maxTurns": 10,
+      "customSystemPrompt": "You are a game design task breakdown specialist. Focus on creating discussion-driven tasks that prioritize creative collaboration over implementation."
+    },
+    "analyze-complexity": {
+      "maxTurns": 3,
+      "appendSystemPrompt": "Focus on identifying creative bottlenecks and discussion points rather than just technical complexity."
+    },
+    "next": {
+      "maxTurns": 2,
+      "appendSystemPrompt": "Always present the next task as a discussion opportunity. Ask design questions before suggesting implementation."
+    }
+  },
+  "project": {
+    "name": "wedding-game",
+    "type": "chaotic-rpg",
+    "philosophy": "discussion-driven collaborative development",
+    "emergency_stop": "Stop - discuss first"
+  }
+}
