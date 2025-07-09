@@ -296,6 +296,23 @@ def main():
             print(f"Error testing aggregator: {e}")
         return
     
+    # If --call flag is passed, make a tool call
+    if len(sys.argv) > 3 and sys.argv[1] == "--call":
+        try:
+            tool_name = sys.argv[2]
+            arguments_json = sys.argv[3]
+            arguments = json.loads(arguments_json)
+            
+            result = aggregator.route_tool_call({
+                "name": tool_name,
+                "arguments": arguments
+            })
+            
+            print(json.dumps(result, indent=2))
+        except Exception as e:
+            print(f"Error calling tool: {e}")
+        return
+    
     aggregator.run_as_server()
 
 if __name__ == "__main__":
