@@ -71,6 +71,41 @@ This is a **DISCUSSION-DRIVEN** collaborative project. The entire point is conve
 - Focus on "Discuss...", "Brainstorm...", "Design..." rather than "Implement..."
 - Save design decisions to memory after discussions
 
+## AI Tool Stack Integration
+
+### **Primary Code Generator**: Claude Code (me)
+- **Role**: Main implementation and architectural decisions
+- **Approach**: Discussion-driven workflow following this CLAUDE.md protocol
+- **Tools**: MCP (memory, sequential-thinking, brave-search), TodoWrite tracking
+
+### **Supplementary AI Tools**:
+- **Cline**: `qwen/qwen-2.5-coder-32b:free` - Quick code snippets and autocomplete
+- **Roo Code**: `deepseek/deepseek-v3-base:free` - Code analysis and debugging support
+- **Kilo Code**: `openrouter/optimus-alpha:free` - Documentation and explanations
+- **GitHub Copilot**: Real-time inline completions
+- **Gemini CLI**: Large codebase analysis when Claude Code context is insufficient
+
+### **Session Setup**:
+Always run session setup to load AI tools:
+```bash
+# Load complete environment
+./scripts/dev-session-manager.sh start
+
+# Or load just OpenRouter models
+source ./scripts/setup-terminal-models.sh
+```
+
+### **Available Workflows**:
+- `dev-code` - Development: Claude Code leads, Cline assists, Roo analyzes, Kilo documents
+- `dev-debug` - Debugging: Roo analyzes, Claude Code fixes, Cline implements, Kilo explains
+- `dev-docs` - Documentation: Kilo creates docs, Roo analyzes, Claude Code provides examples
+
+### **Tool Hierarchy**:
+1. **Claude Code** - Primary decisions and discussion-driven development
+2. **Gemini CLI** - Large-scale analysis exceeding Claude Code context
+3. **VS Code Addons** - Targeted assistance for specific tasks
+4. **GitHub Copilot** - Real-time completions
+
 ## Emergency Stop Protocol
 If I start implementing without discussion, the user should say:
 **"Stop - discuss first"** and I should immediately shift to asking design questions.
@@ -78,3 +113,5 @@ If I start implementing without discussion, the user should say:
 ---
 
 Remember: This project exists for **creative collaboration and discussion**. Code is secondary to the design conversation. Always engage creatively before implementing technically.
+
+**Tool Integration**: All AI tools support the discussion-driven approach, but Claude Code leads the creative collaboration process.

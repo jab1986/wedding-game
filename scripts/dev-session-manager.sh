@@ -25,6 +25,17 @@ case $ACTION in
             echo ""
         fi
         
+        # Setup terminal models and aliases (per CLAUDE.md AI Tool Stack Integration)
+        if [ -f "./scripts/setup-terminal-models.sh" ]; then
+            echo "🤖 Setting up AI Tool Stack (per CLAUDE.md)..."
+            echo "   - Claude Code: Primary code generator (discussion-driven)"
+            echo "   - Cline: qwen/qwen-2.5-coder-32b:free (code snippets)"
+            echo "   - Roo: deepseek/deepseek-v3-base:free (analysis)"
+            echo "   - Kilo: openrouter/optimus-alpha:free (documentation)"
+            source ./scripts/setup-terminal-models.sh
+            echo ""
+        fi
+        
         # Check TaskMaster status
         echo "📋 Checking TaskMaster status..."
         if python3 scripts/aggregate_tools.py --test | grep -q "taskmaster"; then

@@ -512,6 +512,52 @@
         "depends_on": ["testing_framework_selection"],
         "estimated_effort": "low",
         "tags": ["testing", "quality-assurance", "enhancement"]
+      },
+      "enh_003": {
+        "id": "ai_tool_stack_integration",
+        "title": "AI Tool Stack Integration and Workflow",
+        "description": "Ensure OpenRouter models and AI tools are properly integrated with development workflow",
+        "priority": "high",
+        "status": "completed",
+        "type": "enhancement",
+        "technical_requirements": [
+          "OpenRouter API key configured in VS Code settings",
+          "Cline model set to qwen/qwen-2.5-coder-32b:free for code snippets",
+          "Roo model set to deepseek/deepseek-v3-base:free for analysis",
+          "Kilo model set to openrouter/optimus-alpha:free for documentation",
+          "Terminal environment configured with model aliases",
+          "Session manager updated to load AI tool stack",
+          "CLAUDE.md updated with AI tool hierarchy"
+        ],
+        "acceptance_criteria": [
+          "All VS Code addons use correct OpenRouter models",
+          "Terminal aliases work for model switching",
+          "Session startup loads AI tool configuration",
+          "Claude Code maintains primary code generator role",
+          "Discussion-driven workflow is preserved",
+          "MCP tools integrate with OpenRouter models"
+        ],
+        "mcp_tools": ["filesystem", "memory_add_observations"],
+        "ai_tool_hierarchy": {
+          "primary": "Claude Code - Discussion-driven development",
+          "large_analysis": "Gemini CLI - Codebase analysis beyond Claude context",
+          "supplementary": {
+            "cline": "qwen/qwen-2.5-coder-32b:free - Code snippets",
+            "roo": "deepseek/deepseek-v3-base:free - Analysis and debugging",
+            "kilo": "openrouter/optimus-alpha:free - Documentation"
+          },
+          "realtime": "GitHub Copilot - Inline completions"
+        },
+        "workflow_commands": [
+          "dev-code - Development workflow",
+          "dev-debug - Debugging workflow", 
+          "dev-docs - Documentation workflow",
+          "gemini-full - Full project analysis",
+          "model-status - Check current models"
+        ],
+        "depends_on": [],
+        "estimated_effort": "completed",
+        "tags": ["ai-tools", "openrouter", "workflow", "integration"]
       }
     }
   },
@@ -534,7 +580,7 @@
         "next_phase": "enhancement"
       },
       "enhancement": {
-        "tasks": ["impl_chaos_system", "impl_testing_framework"],
+        "tasks": ["impl_chaos_system", "impl_testing_framework", "ai_tool_stack_integration"],
         "priority": "medium",
         "next_phase": "polish"
       }
@@ -635,10 +681,10 @@
   "metadata": {
     "created": "2025-07-08T00:00:00Z",
     "last_updated": "2025-07-08T00:00:00Z",
-    "version": "3.1.0",
-    "total_tasks": 16,
+    "version": "3.1.1",
+    "total_tasks": 17,
     "active_tasks": 16,
-    "completed_tasks": 0,
+    "completed_tasks": 1,
     "claude_code_integration": "full",
     "personality_system": "complete",
     "mcp_integration": "comprehensive",

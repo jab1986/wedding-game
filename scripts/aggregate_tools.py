@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 
 class MCPOverflowAggregator:
-    def __init__(self, config_file: str = "mcp-config-minimal.json"):
+    def __init__(self, config_file: str = "mcp-config-working.json"):
         self.config_file = config_file
         # Define which tools to EXCLUDE (these will be handled directly by Cursor)
         # Keep the most commonly used tools in Cursor's direct MCP setup
