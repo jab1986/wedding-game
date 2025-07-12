@@ -64,7 +64,7 @@ func play_music(music_name: String, loop: bool = true, fade_in: bool = true):
 		return
 	
 	var stream = load(music_path)
-	if stream:
+	if stream and stream is AudioStream:
 		music_player.stream = stream
 		music_player.play()
 		print("AudioManager: Playing music: %s" % music_name)
@@ -73,6 +73,8 @@ func play_music(music_name: String, loop: bool = true, fade_in: bool = true):
 			fade_in_music()
 	else:
 		print("AudioManager: Failed to load music: %s" % music_path)
+		# Create placeholder silence or use default audio
+		return
 
 func stop_music(fade_out: bool = true):
 	if music_player.playing:
@@ -100,13 +102,14 @@ func play_sfx(sfx_name: String, volume: float = 1.0):
 		return
 	
 	var stream = load(sfx_path)
-	if stream:
+	if stream and stream is AudioStream:
 		available_player.stream = stream
 		available_player.volume_db = linear_to_db(volume)
 		available_player.play()
 		print("AudioManager: Playing SFX: %s" % sfx_name)
 	else:
 		print("AudioManager: Failed to load SFX: %s" % sfx_path)
+		# Continue without sound rather than crashing
 
 func get_available_sfx_player() -> AudioStreamPlayer:
 	for player in sfx_players:

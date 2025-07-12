@@ -1,0 +1,36 @@
+# Wedding Game Commit Template
+# 
+# Format: type(scope): description
+# 
+# Types:
+#   feat: New feature (game mechanics, levels, characters)
+#   fix: Bug fix
+#   docs: Documentation changes
+#   style: Code style changes (formatting, etc.)
+#   refactor: Code refactoring
+#   test: Adding or modifying tests
+#   chore: Maintenance tasks
+#   art: Art assets (sprites, audio, etc.)
+#   dialogue: Dialogue content changes
+#
+# Scopes:
+#   gameplay: Game mechanics and rules
+#   audio: Sound effects and music
+#   graphics: Sprites and visual effects
+#   dialogue: Character dialogue system
+#   ui: User interface
+#   level: Level design and progression
+#   character: Character systems
+#   system: Core game systems
+#
+# Example:
+#   feat(gameplay): add new character special attacks
+#   fix(audio): resolve audio manager volume issues
+#   art(graphics): update Mark character sprite animations
+#   dialogue(character): add Glen's wedding dialogue
+#
+# Remember:
+# - Keep description under 50 characters
+# - Use present tense ("add" not "added")
+# - Don't end with a period
+# - Include more details in the body if needed

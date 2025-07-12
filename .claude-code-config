@@ -1,0 +1,127 @@
+# Claude Code Configuration for Wedding Game Project
+
+## Project Overview
+Complete game framework with sophisticated systems ready for content creation.
+
+### Development Approach
+- User provides creative direction and design decisions
+- Claude Code implements using existing systems
+- Focus on content creation rather than system architecture
+
+## 📋 EXISTING SYSTEMS (DO NOT RECREATE)
+
+### ✅ COMPLETE AUTOLOAD SYSTEMS:
+- **GameManager.gd** (193 lines) - Game state, level progression, character unlocking
+- **AudioManager.gd** (216 lines) - Music, SFX, character sounds, fade in/out
+- **SpriteManager.gd** (311 lines) - Sprite management, placeholder generation
+- **StateMachine.gd** (198 lines) - State machine for all entities
+- **DialogueManager** - Full dialogue system addon
+- **DynamicDialogueSystem** - Custom dialogue autoload
+
+### ✅ COMPLETE CONFIGURATION:
+- **project.godot** - All autoloads registered, input mapping, physics layers
+- **Main.tscn** - Entry scene exists and configured
+- **Main.gd** - Main game loop script
+
+### ✅ COMPLETE FEATURES:
+- **Character System** - 6 characters defined with animations
+- **Level Progression** - Unlock system with dependencies
+- **Save/Load** - JSON-based persistence
+- **Audio System** - Bus management, character-specific sounds
+- **Sprite System** - Auto-placeholder generation when assets missing
+
+## 🎯 DEVELOPMENT FOCUS
+
+### Development Guidelines:
+- Use existing GameManager, AudioManager, SpriteManager, StateMachine systems
+- Create content (art, audio, levels, dialogue) using existing frameworks
+- Implement user's creative vision and design decisions
+
+## Content Ready for Creation
+
+## 🎮 CHARACTER SYSTEM READY FOR ART
+
+### Defined Characters (Create Art For These):
+1. **Mark** - Groom, drumstick attacks, 64x64 sprites
+2. **Jenny** - Photographer, camera bomb, 64x64 sprites
+3. **Glen** - Accident-prone, confusion states, 64x64 sprites
+4. **Quinn** - Wedding planner, organization abilities, 64x64 sprites
+5. **Jack** - Hipster guest, coffee animations, 64x64 sprites
+6. **Acids Joe** - BOSS character, psychedelic attacks, 96x96 sprites
+
+### Animation Requirements (Already Configured):
+- **idle** - 4 frames, slow loop
+- **walk** - 4 frames, fast loop
+- **attack/special** - 3-4 frames, no loop
+- **character_specific** - Unique animations per character
+
+## 🎵 AUDIO SYSTEM READY FOR FILES
+
+### Music Needed (Paths Already Configured):
+- **res://audio/music/hub_ambient.ogg** - Hub world theme
+- **res://audio/music/battle_intense.ogg** - Battle theme
+- **res://audio/music/victory_celebration.ogg** - Victory theme
+- **res://audio/music/boss_psychedelic.ogg** - Boss fight theme
+- **res://audio/music/wedding_march.ogg** - Wedding ceremony
+
+### SFX Needed (Paths Already Configured):
+- **res://audio/sfx/menu_select.wav** - Menu navigation
+- **res://audio/sfx/footstep.wav** - Character movement
+- **res://audio/sfx/camera_flash.wav** - Jenny's attack
+- **res://audio/sfx/drumstick_hit.wav** - Mark's attack
+- **res://audio/sfx/explosion.wav** - Glen's accidents
+- **res://audio/sfx/acids_joe_laugh.wav** - Boss sounds
+
+## 🎲 LEVEL PROGRESSION READY FOR CONTENT
+
+### Existing Level Flow:
+```
+glen_bingo → beat_em_up → wedding_adventure → boss_fight → credits
+```
+
+### Level Requirements (System Already Built):
+- **glen_bingo** - Tutorial level, unlocks Jenny
+- **beat_em_up** - Combat level, unlocks Glen
+- **wedding_adventure** - Story level, unlocks Quinn
+- **boss_fight** - Final battle against Acids Joe
+
+## 🔧 TESTING COMMANDS
+
+### GameManager Tests:
+```gdscript
+GameManager.print_game_state()
+GameManager.complete_level("glen_bingo")
+GameManager.unlock_all_levels()
+```
+
+### AudioManager Tests:
+```gdscript
+AudioManager.list_audio_files()
+AudioManager.play_music("hub_theme")
+AudioManager.play_character_sound("mark", "attack")
+```
+
+### SpriteManager Tests:
+```gdscript
+SpriteManager.list_all_characters()
+SpriteManager.print_character_info("mark")
+SpriteManager.create_sprite("mark")
+```
+
+## 🎯 SESSION GOALS
+
+### Good Session Goals:
+- "Create sprite art for Mark character"
+- "Compose hub world music"
+- "Write dialogue for Glen bingo level"
+- "Design level layout for beat_em_up"
+- "Create sound effects for character actions"
+
+### Bad Session Goals:
+- "Create GameManager" (EXISTS)
+- "Fix missing files" (NOT MISSING)
+- "Set up project structure" (ALREADY DONE)
+- "Create audio system" (EXISTS)
+
+## Notes
+Systems are implemented and ready for content creation.

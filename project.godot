@@ -23,6 +23,7 @@ GameManager="*res://autoload/GameManager.gd"
 SpriteManager="*res://autoload/SpriteManager.gd"
 AudioManager="*res://autoload/AudioManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DynamicDialogueSystem="*res://dialogues/DynamicDialogueSystem.gd"
 
 [configuration]
 
@@ -38,6 +39,10 @@ window/size/resizable=false
 [dotnet]
 
 project/assembly_name="Wedding Game"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

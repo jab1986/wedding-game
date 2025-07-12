@@ -18,25 +18,73 @@ func _ready():
 ## Load sprite configurations from JSON file
 func load_sprite_configurations() -> void:
 	if not FileAccess.file_exists(SPRITE_CONFIG_PATH):
+		print("SpriteManager: Config file not found, creating default")
 		create_default_sprite_config()
+		return
 	
 	var file = FileAccess.open(SPRITE_CONFIG_PATH, FileAccess.READ)
-	if file:
-		var json_text = file.get_as_text()
-		file.close()
-		
-		var json = JSON.new()
-		var parse_result = json.parse(json_text)
-		
-		if parse_result == OK:
-			sprite_configs = json.data
-			print("SpriteManager: Loaded %d sprite configurations" % sprite_configs.size())
-		else:
-			print("SpriteManager Error: Failed to parse sprite config JSON")
-			create_default_sprite_config()
-	else:
+	if not file:
 		print("SpriteManager Error: Could not open sprite config file")
 		create_default_sprite_config()
+		return
+	
+	var json_text = file.get_as_text()
+	file.close()
+	
+	# Validate JSON text
+	if json_text.is_empty():
+		print("SpriteManager Error: Empty config file")
+		create_default_sprite_config()
+		return
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result != OK:
+		print("SpriteManager Error: JSON parse failed at line %d: %s" % [json.get_error_line(), json.get_error_message()])
+		create_default_sprite_config()
+		return
+	
+	if not json.data is Dictionary:
+		print("SpriteManager Error: Config file root is not a dictionary")
+		create_default_sprite_config()
+		return
+	
+	# Validate config structure
+	if not _validate_sprite_config(json.data):
+		print("SpriteManager Error: Invalid config structure")
+		create_default_sprite_config()
+		return
+	
+	sprite_configs = json.data
+	print("SpriteManager: Loaded %d sprite configurations" % sprite_configs.size())
+
+## Validate sprite configuration structure
+func _validate_sprite_config(config: Dictionary) -> bool:
+	for character_name in config:
+		var char_config = config[character_name]
+		if not char_config is Dictionary:
+			print("SpriteManager Error: Invalid character config for '%s'" % character_name)
+			return false
+		
+		# Check required fields
+		var required_fields = ["path", "frame_size", "animations", "scale", "offset"]
+		for field in required_fields:
+			if not field in char_config:
+				print("SpriteManager Error: Missing field '%s' in character '%s'" % [field, character_name])
+				return false
+		
+		# Validate frame_size
+		if not char_config.frame_size is Dictionary or not "width" in char_config.frame_size or not "height" in char_config.frame_size:
+			print("SpriteManager Error: Invalid frame_size for character '%s'" % character_name)
+			return false
+		
+		# Validate animations
+		if not char_config.animations is Dictionary:
+			print("SpriteManager Error: Invalid animations for character '%s'" % character_name)
+			return false
+	
+	return true
 
 ## Create default sprite configuration for wedding game characters
 func create_default_sprite_config() -> void:
@@ -144,9 +192,36 @@ func create_sprite(character_name: String) -> AnimatedSprite2D:
 		return null
 	
 	# Create SpriteFrames resource
+	var frames = _create_sprite_frames(config, texture)
+	if not frames:
+		print("SpriteManager Error: Failed to create frames for '%s'" % character_name)
+		return null
+	
+	# Setup sprite properties
+	_setup_sprite_properties(sprite, frames, config)
+	
+	# Connect signals and store reference
+	_finalize_sprite_setup(sprite, character_name)
+	
+	print("SpriteManager: Created sprite for '%s'" % character_name)
+	return sprite
+
+## Create SpriteFrames resource from configuration and texture
+func _create_sprite_frames(config: Dictionary, texture: Texture2D) -> SpriteFrames:
 	var frames = SpriteFrames.new()
 	
 	# Calculate frame dimensions
+	var frame_dimensions = _calculate_frame_dimensions(config, texture)
+	
+	# Create animations
+	for anim_name in config.animations:
+		if not _create_animation(frames, anim_name, config.animations[anim_name], texture, frame_dimensions):
+			print("SpriteManager Warning: Failed to create animation '%s'" % anim_name)
+	
+	return frames
+
+## Calculate frame dimensions and layout
+func _calculate_frame_dimensions(config: Dictionary, texture: Texture2D) -> Dictionary:
 	var frame_width = config.frame_size.width
 	var frame_height = config.frame_size.height
 	var texture_width = texture.get_width()
@@ -154,38 +229,54 @@ func create_sprite(character_name: String) -> AnimatedSprite2D:
 	var cols = texture_width / frame_width
 	var rows = texture_height / frame_height
 	
-	# Create animations
-	for anim_name in config.animations:
-		var anim_config = config.animations[anim_name]
-		frames.add_animation(anim_name)
-		frames.set_animation_loop(anim_name, anim_config.loop)
-		frames.set_animation_speed(anim_name, anim_config.fps)
-		
-		# Add frames to animation
-		for frame_index in anim_config.frames:
-			var x = (frame_index % cols) * frame_width
-			var y = (frame_index / cols) * frame_height
-			
-			var atlas_texture = AtlasTexture.new()
-			atlas_texture.atlas = texture
-			atlas_texture.region = Rect2(x, y, frame_width, frame_height)
-			
-			frames.add_frame(anim_name, atlas_texture)
+	return {
+		"width": frame_width,
+		"height": frame_height,
+		"cols": cols,
+		"rows": rows
+	}
+
+## Create individual animation from configuration
+func _create_animation(frames: SpriteFrames, anim_name: String, anim_config: Dictionary, texture: Texture2D, dimensions: Dictionary) -> bool:
+	frames.add_animation(anim_name)
+	frames.set_animation_loop(anim_name, anim_config.loop)
+	frames.set_animation_speed(anim_name, anim_config.fps)
 	
-	# Setup sprite
+	# Add frames to animation
+	for frame_index in anim_config.frames:
+		var atlas_texture = _create_atlas_texture(texture, frame_index, dimensions)
+		if atlas_texture:
+			frames.add_frame(anim_name, atlas_texture)
+		else:
+			return false
+	
+	return true
+
+## Create atlas texture for a specific frame
+func _create_atlas_texture(texture: Texture2D, frame_index: int, dimensions: Dictionary) -> AtlasTexture:
+	var x = (frame_index % dimensions.cols) * dimensions.width
+	var y = (frame_index / dimensions.cols) * dimensions.height
+	
+	var atlas_texture = AtlasTexture.new()
+	atlas_texture.atlas = texture
+	atlas_texture.region = Rect2(x, y, dimensions.width, dimensions.height)
+	
+	return atlas_texture
+
+## Setup sprite properties from configuration
+func _setup_sprite_properties(sprite: AnimatedSprite2D, frames: SpriteFrames, config: Dictionary) -> void:
 	sprite.sprite_frames = frames
 	sprite.animation = "idle"
 	sprite.scale = Vector2(config.scale, config.scale)
 	sprite.offset = Vector2(config.offset.x, config.offset.y)
-	
+
+## Finalize sprite setup with signals and storage
+func _finalize_sprite_setup(sprite: AnimatedSprite2D, character_name: String) -> void:
 	# Connect signals
 	sprite.animation_finished.connect(_on_sprite_animation_finished.bind(character_name))
 	
 	# Store reference
 	sprite_instances[character_name] = sprite
-	
-	print("SpriteManager: Created sprite for '%s'" % character_name)
-	return sprite
 
 ## Load texture for a character
 func load_texture(character_name: String) -> Texture2D:
@@ -196,7 +287,17 @@ func load_texture(character_name: String) -> Texture2D:
 		return null
 	
 	var config = sprite_configs[character_name]
-	var texture_path = SPRITES_BASE_PATH + config.path
+	
+	# Sanitize path to prevent directory traversal
+	var safe_path = config.path.replace("../", "").replace("..\\", "")
+	var texture_path = SPRITES_BASE_PATH + safe_path
+	
+	# Ensure path is within sprites directory
+	if not texture_path.begins_with(SPRITES_BASE_PATH):
+		print("SpriteManager Error: Invalid path detected: %s" % config.path)
+		var placeholder = create_placeholder_texture(character_name)
+		loaded_textures[character_name] = placeholder
+		return placeholder
 	
 	if not FileAccess.file_exists(texture_path):
 		print("SpriteManager Warning: Texture file not found: %s" % texture_path)

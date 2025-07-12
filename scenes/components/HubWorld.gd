@@ -53,28 +53,52 @@ func _on_player_interaction():
 	for obj in nearby_objects:
 		if obj.has_method("interact"):
 			obj.interact()
+	
+	# If no specific interactables, trigger general hub world dialogue
+	if nearby_objects.size() == 0:
+		trigger_hub_world_dialogue()
 
 func _on_entrance_activated(level_name: String):
 	print("HubWorld: Level entrance activated: %s" % level_name)
 	level_entered.emit(level_name)
 
+var nearby_cache: Dictionary = {}
+var cache_update_timer: float = 0.0
+var cache_update_interval: float = 0.1  # Update cache every 100ms
+
 func get_nearby_interactables() -> Array:
+	var current_time = Time.get_time_dict_from_system()
+	var time_key = str(current_time.hour) + str(current_time.minute) + str(current_time.second)
+	
+	# Use cached result if available and recent
+	if cache_update_timer < cache_update_interval:
+		cache_update_timer += get_process_delta_time()
+		if "interactables" in nearby_cache:
+			return nearby_cache.interactables
+	
+	# Update cache
 	var interactables = []
 	var player_pos = player.global_position
-	var interaction_range = 100.0
+	var interaction_range_squared = 10000.0  # 100.0^2 - avoid sqrt() calls
 	
-	# Check level entrances
+	# Check level entrances using squared distance
 	for entrance in level_entrances.get_children():
-		var distance = player_pos.distance_to(entrance.global_position)
-		if distance <= interaction_range:
+		var distance_squared = player_pos.distance_squared_to(entrance.global_position)
+		if distance_squared <= interaction_range_squared:
 			interactables.append(entrance)
 	
-	# Check NPCs
-	var npcs = $NPCs.get_children()
-	for npc in npcs:
-		var distance = player_pos.distance_to(npc.global_position)
-		if distance <= interaction_range:
-			interactables.append(npc)
+	# Check NPCs (if node exists)
+	var npcs_node = get_node_or_null("NPCs")
+	if npcs_node:
+		var npcs = npcs_node.get_children()
+		for npc in npcs:
+			var distance_squared = player_pos.distance_squared_to(npc.global_position)
+			if distance_squared <= interaction_range_squared:
+				interactables.append(npc)
+	
+	# Update cache
+	nearby_cache.interactables = interactables
+	cache_update_timer = 0.0
 	
 	return interactables
 
@@ -96,6 +120,29 @@ func set_player_position(position: Vector2):
 		player.global_position = position
 		if camera:
 			camera.position = position
+
+func trigger_hub_world_dialogue():
+	# Start dialogue using the Dynamic Dialogue System
+	var dynamic_system = get_node("/root/DynamicDialogueSystem")
+	if dynamic_system:
+		# Determine which dialogue to show based on game state
+		var first_visit = true  # Simplified for now
+		if first_visit:
+			dynamic_system.start_dialogue("res://dialogues/hub_world_interactions.dialogue", "hub_world_entry", "first_visit")
+			GameManager.set_game_state("first_hub_visit", false)
+		else:
+			dynamic_system.start_dialogue("res://dialogues/hub_world_interactions.dialogue", "hub_world_level_selection", "return_visit")
+	else:
+		print("HubWorld: Dynamic Dialogue System not found!")
+
+func trigger_level_entrance_dialogue(level_name: String):
+	# Trigger dialogue specific to level entrances
+	var dynamic_system = get_node("/root/DynamicDialogueSystem")
+	if dynamic_system:
+		var dialogue_title = level_name + "_entrance"
+		dynamic_system.start_dialogue("res://dialogues/hub_world_interactions.dialogue", dialogue_title, "level_entrance")
+	else:
+		print("HubWorld: Dynamic Dialogue System not found!")
 
 # Debug function to show hub layout
 func _draw():

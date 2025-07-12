@@ -27,10 +27,11 @@ func _initialize_state_machine():
 		print("StateMachine Warning: No states registered or initial_state '%s' not found" % initial_state)
 
 ## Register a new state with optional enter/exit callbacks
-func add_state(state_name: String, enter_callback: Callable = Callable(), exit_callback: Callable = Callable()) -> void:
+func add_state(state_name: String, enter_callback: Callable = Callable(), exit_callback: Callable = Callable(), update_callback: Callable = Callable()) -> void:
 	states[state_name] = {
 		"enter": enter_callback,
 		"exit": exit_callback,
+		"update": update_callback,
 		"duration": 0.0
 	}
 	
@@ -137,6 +138,12 @@ func _process(delta: float) -> void:
 	if not current_state.is_empty():
 		if current_state in state_timers:
 			state_timers[current_state] += delta
+
+func _physics_process(delta: float) -> void:
+	if not current_state.is_empty():
+		var state = states[current_state]
+		if state.update.is_valid():
+			state.update.call(delta)
 
 ## Get current state information
 func get_current_state() -> String:

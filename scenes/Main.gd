@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var hub_world = $HubWorld
 @onready var debug_label = $UI/HUD/DebugLabel
+@onready var dialogue_test = $DialogueSystemTest
 
 var game_state: Dictionary = {
 	"player_position": Vector2.ZERO,

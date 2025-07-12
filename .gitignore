@@ -172,3 +172,19 @@ addons/gdai-mcp-plugin-godot/
 
 # Local sync configuration
 .sync-config
+
+# Development artifacts
+reports/
+*.log
+*.tmp
+*.temp
+*.cache
+.project_discovered
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

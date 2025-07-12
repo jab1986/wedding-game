@@ -99,11 +99,12 @@ func interact():
 	if is_locked:
 		print("LevelEntrance: Cannot enter locked level: %s" % level_name)
 		show_locked_message()
+		trigger_locked_dialogue()
 		return
 	
 	if is_player_nearby:
-		print("LevelEntrance: Activating level: %s" % level_name)
-		entrance_activated.emit(level_name)
+		# Trigger dialogue before entering level
+		trigger_entrance_dialogue()
 	else:
 		print("LevelEntrance: Player not nearby for: %s" % level_name)
 
@@ -152,6 +153,47 @@ func _draw():
 	# Draw interaction radius in debug mode
 	if is_player_nearby:
 		draw_circle(Vector2.ZERO, 100, Color(1, 1, 0, 0.2))
+
+func trigger_entrance_dialogue():
+	# Trigger dialogue for this specific level entrance
+	var dynamic_system = get_node("/root/DynamicDialogueSystem")
+	if dynamic_system:
+		var dialogue_title = level_name + "_entrance"
+		dynamic_system.set_character_focus("Mark", "Jenny")
+		dynamic_system.start_dialogue("res://dialogues/hub_world_interactions.dialogue", dialogue_title, "level_entrance")
+		
+		# Connect to dialogue ended signal to enter level after dialogue
+		if not dynamic_system.is_connected("dialogue_ended", _on_entrance_dialogue_ended):
+			dynamic_system.connect("dialogue_ended", _on_entrance_dialogue_ended)
+	else:
+		# Fallback: enter level immediately
+		print("LevelEntrance: Dynamic Dialogue System not found, entering level directly")
+		entrance_activated.emit(level_name)
+
+func trigger_locked_dialogue():
+	# Trigger dialogue for locked levels
+	var dynamic_system = get_node("/root/DynamicDialogueSystem")
+	if dynamic_system:
+		# Set up character reactions to locked level
+		dynamic_system.set_character_focus("Mark", "Quinn")
+		# Use character voice patterns for locked level reactions
+		var reactions = [
+			"Mark: That's locked tight. We need to figure out how to get in.",
+			"Jenny: The composition of this barrier is really interesting...",
+			"Glen: Are we sure we're supposed to go in there?",
+			"Quinn: We need to complete the previous challenges first."
+		]
+		print("[LOCKED LEVEL] " + reactions[randi() % reactions.size()])
+
+func _on_entrance_dialogue_ended():
+	# Enter the level after dialogue is complete
+	print("LevelEntrance: Dialogue ended, activating level: %s" % level_name)
+	entrance_activated.emit(level_name)
+	
+	# Disconnect the signal to avoid multiple connections
+	var dynamic_system = get_node("/root/DynamicDialogueSystem")
+	if dynamic_system and dynamic_system.is_connected("dialogue_ended", _on_entrance_dialogue_ended):
+		dynamic_system.disconnect("dialogue_ended", _on_entrance_dialogue_ended)
 
 func get_level_info() -> Dictionary:
 	return {

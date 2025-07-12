@@ -128,31 +128,58 @@ func get_game_state() -> Dictionary:
 	return game_state
 
 func save_game_state():
+	# Use async save to prevent main thread blocking
+	_save_game_state_async()
+
+func _save_game_state_async():
+	# Schedule save operation for next frame to prevent blocking
+	await get_tree().process_frame
+	
 	var save_file = FileAccess.open("user://game_state.json", FileAccess.WRITE)
 	if save_file:
-		save_file.store_string(JSON.stringify(game_state))
+		var json_string = JSON.stringify(game_state)
+		save_file.store_string(json_string)
 		save_file.close()
-		print("GameManager: Game state saved")
+		print("GameManager: Game state saved asynchronously")
+	else:
+		print("GameManager: Error: Could not open save file for writing")
 
 func load_game_state():
-	if FileAccess.file_exists("user://game_state.json"):
-		var save_file = FileAccess.open("user://game_state.json", FileAccess.READ)
-		if save_file:
-			var json_text = save_file.get_as_text()
-			save_file.close()
-			
-			var json = JSON.new()
-			var parse_result = json.parse(json_text)
-			
-			if parse_result == OK:
-				# Merge loaded state with defaults
-				for key in json.data:
-					game_state[key] = json.data[key]
-				print("GameManager: Game state loaded")
-			else:
-				print("GameManager: Failed to parse save file")
-	else:
+	# Use async load to prevent main thread blocking
+	_load_game_state_async()
+
+func _load_game_state_async():
+	# Schedule load operation for next frame
+	await get_tree().process_frame
+	
+	if not FileAccess.file_exists("user://game_state.json"):
 		print("GameManager: No save file found, using defaults")
+		return
+	
+	var save_file = FileAccess.open("user://game_state.json", FileAccess.READ)
+	if not save_file:
+		print("GameManager: Error: Could not open save file for reading")
+		return
+	
+	var json_text = save_file.get_as_text()
+	save_file.close()
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result == OK and json.data is Dictionary:
+		# Validate and merge loaded state with defaults
+		var loaded_data = json.data as Dictionary
+		for key in loaded_data:
+			# Only merge valid game state keys
+			if key in game_state:
+				game_state[key] = loaded_data[key]
+		print("GameManager: Game state loaded asynchronously")
+		
+		# Emit signal to notify other systems
+		game_state_changed.emit(game_state)
+	else:
+		print("GameManager: Failed to parse save file")
 
 func reset_game():
 	game_state = {
